@@ -7,90 +7,89 @@
     use Illuminate\Http\Request;
     use Illuminate\Support\Facades\Route;
 
-    /*
-    |--------------------------------------------------------------------------
-    | Web Routes
-    |--------------------------------------------------------------------------
-    |
-    | Here is where you can register web routes for your application. These
-    | routes are loaded by the RouteServiceProvider within a group which
-    | contains the "web" middleware group. Now create something great!
-    |
-    */
+    // send a GET request to '/' and return a view object from welcome
+    // view can have an(y) (JSON format/multidimensional) array of any data you want ['key' => 'value']
 
-# send a GET request to '/' and return a view object from welcome
-# view can have an(y) (JSON format/multidimensional) array of any data you want ['key' => 'value']
+    # COMMON RESOURCE ROUTES:
+    # index - show all listings
+    # show - show single listing
+    # create - show form to create new listing
+    # store - store new listing
+    # edit - show form to edit listing
+    # update - update listing
+    # destroy - delete listing
 
-# COMMON RESOURCE ROUTES:
-# index - show all listings
-# show - show single listing
-# create - show form to create new listing
-# store - store new listing
-# edit - show form to edit listing
-# update - update listing
-# destroy - delete listing
 
+    // show all properties
     Route::get('/', [Real_Estate_ObjectController::class, 'index']);
-// show create form
-    Route::get('/listings/create', [ListingController::class, 'create'])->middleware('auth');
-// carry out the store from the create form action
-    Route::post('/listings', [ListingController::class, 'store'])->middleware('auth');
-// show edit form
-    Route::get('/listings/{listing}/edit', [ListingController::class, 'edit'])->middleware('auth');
-// carry out the update from the edit form action
-    Route::put('/listings/{listing}', [ListingController::class, 'update'])->middleware('auth');
-// delete listing
-    Route::delete('/listings/{listing}', [ListingController::class, 'destroy'])->middleware('auth');
-// manage listings that belong to user (or user_role)
-    Route::get('/listings/manage', [ListingController::class, 'manage'])->middleware('auth');
-// THIS ONE NEEDS TO BE THE LAST ONE
-// show single listing
-    Route::get('/listings/{listing}', [ListingController::class, 'show']);
-
-// show the register/create form
-    Route::get('/register', [UserController::class, 'create'])->middleware('guest');
-// create new user
-    Route::post('/users', [UserController::class, 'store']);
-// log user out
-    Route::post('/logout', [UserController::class, 'logout'])->middleware('auth');
-// show login form
-    Route::get('/login', [UserController::class, 'login'])->name('login')->middleware('guest');
-// login user
-    Route::post('/users/authenticate', [UserController::class, 'authenticate']);
-
-
-// show all properties
     Route::get('/properties', [Real_Estate_ObjectController::class, 'index']);
 
-// show create form
+    // show create form
     Route::get('/properties/create', [Real_Estate_ObjectController::class, 'create']);
 
-// carry out the store from the create form action
+    // store data from create form
     Route::post('/properties', [Real_Estate_ObjectController::class, 'store'])
         ->middleware('auth');
 
-// show edit form
+    // show edit form
     Route::get('/properties/{real_estate_object}/edit', [Real_Estate_ObjectController::class, 'edit'])
         ->middleware('auth');
 
-// carry out the update from the edit form action
+    // update data using edit form
     Route::put('/properties/{real_estate_object}', [Real_Estate_ObjectController::class, 'update'])
         ->middleware('auth');
 
-// delete property
+    // delete property
     Route::delete('/properties/{real_estate_object}', [Real_Estate_ObjectController::class, 'destroy'])
         ->middleware('auth');
 
-// manage real_estate_objects that belong to user (or user_role)
+    // manage real_estate_objects that belong to user (or user_role)
     Route::get('/properties/manage', [Real_Estate_ObjectController::class, 'manage'])
         ->middleware('auth');
+
+
     // open property grid
     Route::get('/properties/grid', [Real_Estate_ObjectController::class, 'grid']);
 
-// TODO: CREATE MANAGE_IMAGES for managing the images of single object
-// THIS ONE NEEDS TO BE THE LAST ONE
-// show single property
+    // TODO: CREATE MANAGE_IMAGES for managing the images of single object
+    // THIS ONE NEEDS TO BE THE LAST ONE
+    // show single property
     Route::get('/properties/{real_estate_object}', [Real_Estate_ObjectController::class, 'show']);
+
+
+    // show create form
+    Route::get('/listings/create', [ListingController::class, 'create'])->middleware('auth');
+
+    // carry out the store from the create form action
+    Route::post('/listings', [ListingController::class, 'store'])->middleware('auth');
+
+    // show edit form
+    Route::get('/listings/{listing}/edit', [ListingController::class, 'edit'])->middleware('auth');
+
+    // carry out the update from the edit form action
+    Route::put('/listings/{listing}', [ListingController::class, 'update'])->middleware('auth');
+
+    // delete listing
+    Route::delete('/listings/{listing}', [ListingController::class, 'destroy'])->middleware('auth');
+
+    // manage listings that belong to user (or user_role)
+    Route::get('/listings/manage', [ListingController::class, 'manage'])->middleware('auth');
+
+    // THIS ONE NEEDS TO BE THE LAST ONE
+    // show single listing
+    Route::get('/listings/{listing}', [ListingController::class, 'show']);
+
+    // show the register/create form
+    Route::get('/register', [UserController::class, 'create'])->middleware('guest');
+    // create new user
+    Route::post('/users', [UserController::class, 'store']);
+    // log user out
+    Route::post('/logout', [UserController::class, 'logout'])->middleware('auth');
+    // show login form
+    Route::get('/login', [UserController::class, 'login'])->name('login')->middleware('guest');
+    // login user
+    Route::post('/users/authenticate', [UserController::class, 'authenticate']);
+
 
     // Route::get('/', function () {
     // return view('listings', [
