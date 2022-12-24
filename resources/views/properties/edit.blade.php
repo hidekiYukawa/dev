@@ -152,11 +152,11 @@
                     @enderror
                 </div>
                 <div class="mb-6">
-                    <label for="object_address" class="inline-block text-lg mb-2">Street Name</label>
-                    <input type="text" class="border border-gray-200 rounded p-2 w-full" name="object_address"
-                           value="{{$realEstateObject->object_address}}"/>
+                    <label for="object_address_street" class="inline-block text-lg mb-2">Street Name</label>
+                    <input type="text" class="border border-gray-200 rounded p-2 w-full" name="object_address_street"
+                           value="{{$realEstateObject->object_address_street}}"/>
 
-                    @error('object_address')
+                    @error('object_address_street')
                     <p class="text-red-500 text-xs mt-1">{{$message}}</p>
                     @enderror
                 </div>

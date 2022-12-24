@@ -16,8 +16,8 @@
         {
             return view('properties.index', [
                 'realEstateObjects' => Real_Estate_Object::latest()
-                    ->filter(request(['tag', 'search']))
-                    ->get()
+                    ->filter(request(['tag', 'search']))->get()
+
             ]);
         }
 
@@ -47,8 +47,8 @@
         {
             $formFields = $request->validate([
                 'object_title' => 'required',
-                'tags' => 'required',
-                'images' => 'nullable',
+                'tags' => 'nullable',
+                'images.*' => 'nullable|image|mimes:jpg,webp,png,jpeg,gif,svg|dimensions:min_width=100,min_height=100',
                 'hasImages' => 'nullable',
                 'offer_type' => 'required', // sale, rent or sale/rent
                 'object_type' => 'required', // land, apartment, realEstate
@@ -96,16 +96,25 @@
             $data = [];
 
             if (count($a) > 0) { // more than one image has been uploaded
-                for ($i = 0; $i < count($a); $i++) {
+                for ($i = -1; $i < count($a); $i++) {
+                    if($i === -1) {
+                        $formfields['url'] = $formFields['images'];
+                        continue;
+                    }
+
                     $fileName = time() . rand(1, 99) . '.' . $a[$i]->extension();
                     $a[$i]->move(public_path('uploads'), $fileName);
                     $formfields['url'] = 'uploads/'.$fileName;
+
                     RealEstateObjectImage::create($formfields);
                     $data[]['name'] = $fileName;
                 }
+            } else {
+                $formfields['url'] = $formFields['images'];
+                RealEstateObjectImage::create($formfields);
             }
 
-            return redirect('/properties')->with('message', 'Property created successfully!');
+            return redirect('/')->with('message', 'Property created successfully!');
 
         }
 
@@ -128,8 +137,8 @@
         {
             $formFields = $request->validate([
                 'object_title' => 'required',
-                'tags' => 'required',
-                'images' => 'nullable',
+                'tags' => 'nullable',
+                'images.*' => 'image|mimes:jpg,png,jpeg,gif,webp,svg|dimensions:min_width=100,min_height=100',
                 'hasImages' => 'nullable',
                 'offer_type' => 'required', // sale, rent or sale/rent
                 'object_type' => 'required', // land, apartment, realEstate
@@ -181,14 +190,16 @@
                     $fileName = time() . rand(1, 99) . '.' . $a[$i]->extension();
                     $a[$i]->move(public_path('uploads'), $fileName);
                     $formfields['url'] = 'uploads/'.$fileName;
+
                     RealEstateObjectImage::create($formfields);
+
                     $data[]['name'] = $fileName;
                 }
             }
 
             $realEstateObject->update($formFields);
 
-            return back()->with('message', "Property Updated Successfully!");
+            return redirect('/properties/manage')->with('message', "Property Updated Successfully!");
 
 
         }

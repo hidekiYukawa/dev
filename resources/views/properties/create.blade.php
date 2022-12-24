@@ -6,14 +6,18 @@
                 <div class="row">
                     <div class="col-md-12">
                         <h2 class="text-2xl font-bold uppercase mb-1">Create Real Estate object</h2>
-                        <p class="mb-4">Post a new Real Estate Object</p>
+                        <br/><p class="mb-4">Post a new Real Estate Object</p>
+                        <p>Please fill out as much data as possible. <br/><br/>
+                            Only the title and offer_type are required;<br/><br/>
+                            The rest can be left empty;<br/>
+                            Later you can add the fields that you've left empty in here.</p>
                     </div>
                 </div>
             </x-card>
         </section>
         <section class="table-add">
             <div class="row">
-                <div class="col-md-6 offset-md-3">
+                <div class="col-md-8 offset-md-2">
                     {{--                    <form>--}}
                     {{--                        <div class="group">--}}
                     {{--                            <input type="text"><span class="highlight"></span><span class="bar"></span>--}}
@@ -50,6 +54,7 @@
                             @enderror
                         </div>
 
+
                         <div class="group">
                             <input type="text" class="" name="tags"
                                    value="{{old('tags')}}"/>
@@ -59,35 +64,43 @@
                             <p class="text-red-500 text-xs mt-1">{{$message}}</p>
                             @enderror
                         </div>
-                        <div class="group">
-                            <label for="images" class="">
-                            </label>
-                            <input type="file" multiple class="" name="images[]"/>
 
-                            @error('images')
+
+{{--                        <div class="group">--}}
+{{--                            <input type="text" placeholder="" class="" name="offer_type" value="{{old('offer_type')}}"/>--}}
+{{--                            <label for="offer_type" class="">--}}
+{{--                                Offer Type (sale/rent)--}}
+{{--                            </label>--}}
+                        <div class="group">
+                            <select class="form-control" name="object_type" id="object_type-select">
+                                <option value="{{old('object_type')}}" selected="selected">{{old('object_type')}}</option>
+                                <option value="land">Land</option>
+                                <option value="apartment">Apartment</option>
+                                <option value="room">Room</option>
+                            </select>
+                            {{--                            <input type="text" class="" name="objectect_type"--}}
+                            {{--                                   value="{{old('object_type')}}"/>--}}
+                            <label for="object_type" class="">Object Type (land/apartment/house/building/...) </label>
+
+                            @error('object_type')
                             <p class="text-red-500 text-xs mt-1">{{$message}}</p>
                             @enderror
                         </div>
-
                         <div class="group">
-                            <input type="text" placeholder="" class="" name="offer_type" value="{{old('offer_type')}}"/>
-                            <label for="offer_type" class="">offer_type
-                                (sale/rent) </label>
+                            <select class="form-control" name="offer_type" id="offer_type-select">
+                                <option value="sale" selected="selected">For Sale</option>
+                                <option value="rent">For Rent</option>
+                                <option value="sale-and-rent">For Sale and For Rent</option>
+                            </select>
+                            <label for="offer_type-select">Offer Type</label>
 
                             @error('offer_type')
                             <p class="text-red-500 text-xs mt-1">{{$message}}</p>
                             @enderror
                         </div>
 
-                        <div class="group">
-                            <input type="text" class="" name="object_type"
-                                   value="{{old('object_type')}}"/>
-                            <label for="object_type" class="">object_type </label>
 
-                            @error('object_type')
-                            <p class="text-red-500 text-xs mt-1">{{$message}}</p>
-                            @enderror
-                        </div>
+
 
                         <div class="group">
                             <input type="text" class="" name="location"
@@ -102,7 +115,7 @@
                         <div class="group">
                             <input type="text" class="" name="maps_url"
                                    value="{{old('maps_url')}}"/>
-                            <label for="maps_url" class="">maps_url </label>
+                            <label for="maps_url" class="">Google maps embed URL </label>
 
                             @error('maps_url')
                             <p class="text-red-500 text-xs mt-1">{{$message}}</p>
@@ -120,8 +133,8 @@
                         <div class="group">
                             <input type="text" class=""
                                    name="object_status"
-                                   value="{{old('object_status')}}"/>
-                            <label for="object_status" class="">object_status </label>
+                                   value="{{(old('object_status')) ?: 'Available'}}"/>
+                            <label for="object_status" class="">Object status (available) </label>
 
                             @error('object_status')
                             <p class="text-red-500 text-xs mt-1">{{$message}}</p>
@@ -130,7 +143,7 @@
                         <div class="group">
                             <input type="text" class="" name="object_price"
                                    value="{{old('object_price')}}"/>
-                            <label for="object_price" class="">object_price </label>
+                            <label for="object_price" class="">Object price (if not available fill 1 in next field) </label>
 
                             @error('object_price')
                             <p class="text-red-500 text-xs mt-1">{{$message}}</p>
@@ -140,7 +153,7 @@
                             <input type="text" class=""
                                    name="object_price_POA"
                                    value="{{old('object_price_POA')}}"/>
-                            <label for="object_price_POA" class="">object_price_POA </label>
+                            <label for="object_price_POA" class="">object_price_POA (1 = price is on request) </label>
 
                             @error('object_price_POA')
                             <p class="text-red-500 text-xs mt-1">{{$message}}</p>
@@ -149,7 +162,7 @@
                         <div class="group">
                             <input type="text" class="" name="numBedrooms"
                                    value="{{old('numBedrooms')}}"/>
-                            <label for="numBedrooms" class="">numBedrooms </label>
+                            <label for="numBedrooms" class="">Number of Bedrooms (DON'T FILL IF EMPTY) </label>
 
                             @error('numBedrooms')
                             <p class="text-red-500 text-xs mt-1">{{$message}}</p>
@@ -160,7 +173,7 @@
                         <div class="group">
                             <input type="text" class="" name="numBathrooms"
                                    value="{{old('numBathrooms')}}"/>
-                            <label for="numBathrooms" class="">numBathrooms</label>
+                            <label for="numBathrooms" class="">Number of bathrooms (DON'T FILL IF NONE)</label>
 
                             @error('numBathrooms')
                             <p class="text-red-500 text-xs mt-1">{{$message}}</p>
@@ -169,7 +182,7 @@
                         <div class="group">
                             <input type="text" class="" name="airco"
                                    value="{{old('airco')}}"/>
-                            <label for="airco" class="">airco</label>
+                            <label for="airco" class="">airco (yes/no/...)</label>
 
                             @error('airco')
                             <p class="text-red-500 text-xs mt-1">{{$message}}</p>
@@ -194,6 +207,15 @@
                             </label>
 
                             @error('object_address_no')
+                            <p class="text-red-500 text-xs mt-1">{{$message}}</p>
+                            @enderror
+                        </div>
+                        <div class="group">
+                            <label for="images" class="">
+                            </label>
+                            <input type="file" multiple class="" name="images[]"/>
+
+                            @error('images')
                             <p class="text-red-500 text-xs mt-1">{{$message}}</p>
                             @enderror
                         </div>

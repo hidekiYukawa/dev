@@ -35,7 +35,7 @@ class DatabaseSeeder extends Seeder
 
 
         # use the Real_Estate_ObjectFactory
-        Real_Estate_Object::factory(9)->create([
+        Real_Estate_Object::factory(3)->create([
             'user_id' => $user->id
         ]);
 

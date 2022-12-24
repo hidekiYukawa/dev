@@ -57,7 +57,7 @@
                                     </div>
                                 @endunless
                             </div>
-                            <div style="margin: 0 auto; margin-top: 2em; padding-top: 3em;" class="property-single-carousel-pagination carousel-pagination"></div>
+{{--                            <div style="margin: 0 auto; margin-top: 2em; padding-top: 3em;" class="property-single-carousel-pagination carousel-pagination"></div>--}}
                         </div>
                     </div>
                 </div>

@@ -2,13 +2,13 @@
     @include('partials._custom-nav-show')
 
     <x-main>
-        @include('partials._search')
+{{--        @include('partials._search')_search--}}
         <div class="container">
             <section class="header">
 
 
                 <header>
-                    <h1 class="text-3xl text-center font-bold my-6 uppercase">
+                    <h1 style="margin-top: 15em;" class="text-3xl text-center font-bold  uppercase">
                         Manage Real Estate Objects
                     </h1>
                 </header>

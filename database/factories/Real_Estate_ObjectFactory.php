@@ -61,7 +61,7 @@ class Real_Estate_ObjectFactory extends Factory {
             'numBedrooms' => $this->faker->numberBetween(0, 5),
             'numBathrooms' => $this->faker->numberBetween(0, 4),
             'airco' => 'yes',
-            'object_address_street' => $this->faker->address(),
+            'object_address_street' => $this->faker->streetAddress(),
             'object_address_no' => $this->faker->buildingNumber(),
             'features' => $this->faker->paragraph(3),
             'description' => $this->faker->paragraph(6)

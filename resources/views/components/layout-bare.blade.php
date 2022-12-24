@@ -24,16 +24,20 @@
         <link rel="stylesheet" href="{{asset('css/modal.css')}}"/>
         <link rel="stylesheet" href="{{asset('css/form.css')}}"/>
 
+        <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 
 
 
         <script src="{{asset('js/jquery.js')}}"></script>
+        <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
+        <script src="{{asset('assets/js/select2.full.js')}}"></script>
 
 
         {{-- <script src= --}}
         <title>Holland Gambia Real Estate </title>
     </head>
-    <body class="mb-48" style="background-image: url(http://theartmad.com/wp-content/uploads/Dark-Grey-Texture-Wallpaper-5.jpg); background-size: cover; background-position: top left;">
+    <body class="mb-48" style="background-image: url(https://theartmad.com/wp-content/uploads/Dark-Grey-Texture-Wallpaper-5.jpg); background-size: cover; background-position: top left;">
         {{$slot}}
     </body>
     <script src="{{asset('assets/vendor/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
@@ -43,8 +47,10 @@
     <script src="{{asset('assets/js/core.js')}}"></script>
     {{-- <script src="{{asset('js/input_effect.js')}}"></script> --}}
     <script src="{{asset('js/custom.js')}}"></script>
-    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+{{--    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>--}}
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script src="{{asset('js/select2.js')}}"></script>
     <script type="text/javascript">
         var i = 0;
         $(".dynamic-ar").click(function () {

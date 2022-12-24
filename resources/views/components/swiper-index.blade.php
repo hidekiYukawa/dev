@@ -10,8 +10,23 @@
 {{--<div class="swiper-slide carousel-item-a intro-item bg-image" style="background-image: url('{{asset(explode(',', $realEstateObject->images)[0])}}')">--}}
 @php
 //dd(public_path('uploads').'/');
+
+    $images = $realEstateObject->realEstateObjectImages()->get()->all();
+
+    if (count($images) > 0) {
+    	$image = $images[array_rand($images)]->url;
+    } else {
+    	$image = 'images/no-image.png';
+    }
+//dd(array_rand($images[]->url));
+
+//$images = array_shift($images);
+//$image[] = array_rand($images, 1);
+
+//dd($image);
+
 @endphp
-<div class="swiper-slide carousel-item-a intro-item bg-image" style="background-image: url('{{asset($realEstateObject->images)}}')">
+<div class="swiper-slide carousel-item-a intro-item bg-image" style="background-image: url('{{asset($image)}}')">
     <div class="overlay overlay-a"></div>
     <div class="intro-content display-table">
         <div class="table-cell">
@@ -30,7 +45,7 @@
                             <p class="intro-subtitle intro-price">
                                 <a href="/properties/{{$realEstateObject->id}}">
                                     <span
-                                        class="price-a">for {{$realEstateObject->offer_type}} | &euro; {{$realEstateObject->object_price}}
+                                        class="price-a">For {{$realEstateObject->offer_type}} | &euro; {{$realEstateObject->object_price}}
                                     </span>
                                 </a>
                             </p>
